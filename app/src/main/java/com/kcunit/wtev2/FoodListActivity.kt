@@ -10,12 +10,26 @@ import android.widget.Toast
 
 class FoodListActivity : AppCompatActivity() {
 
+    /**
+     * 菜品数据
+     */
+    private val foodDatas=ArrayList<FoodBriefItem>()
+
+    private lateinit var thisAdapter:BaseAdapterPlus<FoodBriefItem>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_list)
 
         //增加ActionBar回退按钮
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        //初始化adapter
+        thisAdapter=object :BaseAdapterPlus<FoodBriefItem>(foodDatas,R.layout.activity_food_list){
+            override fun bindView(viewHolder: ViewHolder, obj: FoodBriefItem?) {
+
+            }
+        }
     }
 
     /**
@@ -53,5 +67,12 @@ class FoodListActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         Toast.makeText(this,"回退按钮已点击",Toast.LENGTH_LONG).show()
         return super.onSupportNavigateUp()
+    }
+
+    /**
+     * 绑定列表数据
+     */
+    private fun bindListDatas(){
+
     }
 }
