@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WTEv2</string>
+    <string name="food_list_name">菜品列表</string>
+    <string name="food_list_actionbar_menu_add">添加</string>
+</resources>
