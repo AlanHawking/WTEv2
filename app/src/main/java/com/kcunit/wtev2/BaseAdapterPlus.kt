@@ -38,7 +38,7 @@ abstract class BaseAdapterPlus<T>: BaseAdapter {
 
         this.bindView(vh,getItem(position))
 
-        return convertView
+        return vh.getItemView()
     }
 
     abstract fun bindView(viewHolder:ViewHolder,obj:T?)

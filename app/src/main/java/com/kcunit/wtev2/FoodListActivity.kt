@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.ActionBar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ListView
 import android.widget.Toast
 
 class FoodListActivity : AppCompatActivity() {
@@ -17,6 +18,8 @@ class FoodListActivity : AppCompatActivity() {
 
     private lateinit var thisAdapter:BaseAdapterPlus<FoodBriefItem>
 
+    private lateinit var thisList:ListView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_list)
@@ -24,12 +27,25 @@ class FoodListActivity : AppCompatActivity() {
         //增加ActionBar回退按钮
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //初始化adapter
-        thisAdapter=object :BaseAdapterPlus<FoodBriefItem>(foodDatas,R.layout.activity_food_list){
-            override fun bindView(viewHolder: ViewHolder, obj: FoodBriefItem?) {
+        //foodDatas.add(FoodBriefItem("麻婆豆腐",15,12,4.1f))
 
+        //初始化adapter
+        thisAdapter=object :BaseAdapterPlus<FoodBriefItem>(foodDatas,R.layout.food_list_item){
+            override fun bindView(viewHolder: ViewHolder, obj: FoodBriefItem?) {
+                if (obj!=null) {
+                    viewHolder.setText(R.id.foodListItemName, obj.FoodName)
+                    viewHolder.setText(R.id.foodListItemPrice, "${obj.FoodPriceMin}-${obj.FoodPriceMax}元")
+                    viewHolder.setRate(R.id.foodListItemRate,obj.FoodRate)
+                }
             }
         }
+
+        //thisAdapter.AddData(FoodBriefItem("麻婆豆腐",15,12,4.1f))
+
+        thisList=findViewById(R.id.foodListListView) as ListView
+        thisList.adapter=thisAdapter
+
+        //bindListData()
     }
 
     /**
@@ -49,13 +65,15 @@ class FoodListActivity : AppCompatActivity() {
     }
 
     /**
-     * 菜单按钮点击事件
+     * 菜单按钮选中事件
+     * @param item 菜单按钮
+     * @return
      */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             //添加按钮
             R.id.foodListActionBar_menu_add -> {
-                Toast.makeText(this,"添加按钮已点击",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"添加按钮已点击",Toast.LENGTH_SHORT).show()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -65,14 +83,14 @@ class FoodListActivity : AppCompatActivity() {
      * 回退导航按钮点击事件
      */
     override fun onSupportNavigateUp(): Boolean {
-        Toast.makeText(this,"回退按钮已点击",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"回退按钮已点击",Toast.LENGTH_SHORT).show()
         return super.onSupportNavigateUp()
     }
 
     /**
      * 绑定列表数据
      */
-    private fun bindListDatas(){
-
+    private fun bindListData(){
+        thisAdapter.AddData(FoodBriefItem("麻婆豆腐",15,12,4.1f))
     }
 }
