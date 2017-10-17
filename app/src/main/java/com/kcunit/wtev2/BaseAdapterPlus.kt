@@ -1,5 +1,6 @@
 package com.kcunit.wtev2
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -11,10 +12,12 @@ import java.util.ArrayList
 abstract class BaseAdapterPlus<T>: BaseAdapter {
     private var mData: ArrayList<T>? =null
     private var mLayoutRes: Int=0
+    private var mContext: Context
 
-    constructor(data:ArrayList<T>,resId:Int){
+    constructor(context: Context,data:ArrayList<T>,resId:Int){
         this.mData=data
         this.mLayoutRes=resId
+        this.mContext=context
     }
 
     override fun getCount(): Int {
@@ -22,7 +25,7 @@ abstract class BaseAdapterPlus<T>: BaseAdapter {
     }
 
     override fun getItem(position: Int): T? {
-        if (this.count >= position + 1){
+        if (this.count >= position + 1 && position >= 0){
             return this.mData?.get(position)
         }
 
@@ -34,7 +37,7 @@ abstract class BaseAdapterPlus<T>: BaseAdapter {
     }
 
     override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
-        val vh:ViewHolder = ViewHolder.bind(parent.context,convertView,parent,this.mLayoutRes,position)
+        val vh:ViewHolder = ViewHolder.bind(this.mContext,convertView,parent,this.mLayoutRes,position)
 
         this.bindView(vh,getItem(position))
 
@@ -45,11 +48,13 @@ abstract class BaseAdapterPlus<T>: BaseAdapter {
 
     fun AddData(data:T){
         this.mData?.add(data)
+        notifyDataSetChanged()
     }
 
     fun RemoveDataAt(position:Int):Boolean{
         if (position<this.count-1){
             this.mData?.removeAt(position)
+            notifyDataSetChanged()
             return true
         }
         return false
@@ -57,6 +62,7 @@ abstract class BaseAdapterPlus<T>: BaseAdapter {
 
     fun InsertData(position:Int,data:T){
         this.mData?.add(position,data)
+        notifyDataSetChanged()
     }
 
     fun ReplaceData(position:Int,data:T):Boolean{
@@ -66,6 +72,7 @@ abstract class BaseAdapterPlus<T>: BaseAdapter {
             }else{
                 this.AddData(data)
             }
+            notifyDataSetChanged()
             return true
         }
         return false
@@ -73,5 +80,6 @@ abstract class BaseAdapterPlus<T>: BaseAdapter {
 
     fun ClearData(){
         this.mData?.clear()
+        notifyDataSetChanged()
     }
 }

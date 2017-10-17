@@ -24,7 +24,7 @@ class ViewHolder {
         this.context = context
         val convertView:View = LayoutInflater.from(context).inflate(layoutRes, parent, false)
         convertView.tag = this
-        item = convertView
+        this.item = convertView
     }
 
     /**
@@ -48,28 +48,33 @@ class ViewHolder {
         }
     }
 
+    /**
+     * 获取view,先试图从已存储的列表中寻找,再直接使用findViewById寻找
+     * @param id view的id
+     * @return 对应id的View
+     */
+    @Suppress("UNCHECKED_CAST")
     @SuppressWarnings("unchecked")
     fun <T:View>getView(id:Int): T {
-        var t = mViews.get(id) as T
+        var t:T? = mViews.get(id) as T
 
-        t = item.findViewById(id)
-        mViews.put(id, t)
-        return t
+        if(t==null) {
+            t = item.findViewById(id)
+            mViews.put(id, t)
+        }
+
+        return t!!
     }
 
     /**
      * 获取当前条目
      */
-    fun getItemView():View {
-        return item
-    }
+    fun getItemView():View = item
 
     /**
      * 获取条目位置
      */
-    fun getItemPosition():Int {
-        return position
-    }
+    fun getItemPosition():Int = position
 
     /**
      * 设置文字
@@ -77,7 +82,7 @@ class ViewHolder {
     fun setText(id:Int, text:CharSequence):ViewHolder {
         val view:View = getView(id)
         if (view is TextView) {
-             view.text = text
+            view.text = text
         }
         return this
     }

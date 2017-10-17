@@ -27,10 +27,8 @@ class FoodListActivity : AppCompatActivity() {
         //增加ActionBar回退按钮
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //foodDatas.add(FoodBriefItem("麻婆豆腐",15,12,4.1f))
-
         //初始化adapter
-        thisAdapter=object :BaseAdapterPlus<FoodBriefItem>(foodDatas,R.layout.food_list_item){
+        thisAdapter=object :BaseAdapterPlus<FoodBriefItem>(this,foodDatas,R.layout.food_list_item){
             override fun bindView(viewHolder: ViewHolder, obj: FoodBriefItem?) {
                 if (obj!=null) {
                     viewHolder.setText(R.id.foodListItemName, obj.FoodName)
@@ -39,8 +37,6 @@ class FoodListActivity : AppCompatActivity() {
                 }
             }
         }
-
-        //thisAdapter.AddData(FoodBriefItem("麻婆豆腐",15,12,4.1f))
 
         thisList=findViewById(R.id.foodListListView) as ListView
         thisList.adapter=thisAdapter
