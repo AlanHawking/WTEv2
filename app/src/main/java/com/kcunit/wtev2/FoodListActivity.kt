@@ -8,15 +8,16 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
 import android.widget.Toast
+import java.util.*
 
 class FoodListActivity : AppCompatActivity() {
 
     /**
      * 菜品数据
      */
-    private val foodDatas=ArrayList<FoodBriefItem>()
+    private val foodDatas=LinkedList<FoodBriefItem>()
 
-    private lateinit var thisAdapter:BaseAdapterPlus<FoodBriefItem>
+    private lateinit var thisAdapter:BaseAdapterEnhanced<FoodBriefItem>
 
     private lateinit var thisList:ListView
 
@@ -27,14 +28,13 @@ class FoodListActivity : AppCompatActivity() {
         //增加ActionBar回退按钮
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        foodDatas.add(FoodBriefItem("麻婆豆腐",15,12,4.1f))
         //初始化adapter
-        thisAdapter=object :BaseAdapterPlus<FoodBriefItem>(this,foodDatas,R.layout.food_list_item){
-            override fun bindView(viewHolder: ViewHolder, obj: FoodBriefItem?) {
-                if (obj!=null) {
-                    viewHolder.setText(R.id.foodListItemName, obj.FoodName)
-                    viewHolder.setText(R.id.foodListItemPrice, "${obj.FoodPriceMin}-${obj.FoodPriceMax}元")
-                    viewHolder.setRate(R.id.foodListItemRate,obj.FoodRate)
-                }
+        thisAdapter=object :BaseAdapterEnhanced<FoodBriefItem>(foodDatas,this,R.layout.food_list_item){
+            override fun bindData(viewHolder: ViewHolder, data: FoodBriefItem) {
+                viewHolder.setText(R.id.foodListItemName, data.FoodName)
+                viewHolder.setText(R.id.foodListItemPrice, "${data.FoodPriceMin}-${data.FoodPriceMax}元")
+                viewHolder.setRate(R.id.foodListItemRate,data.FoodRate)
             }
         }
 
@@ -55,10 +55,7 @@ class FoodListActivity : AppCompatActivity() {
     /**
      * 菜单加载前事件(该函数在每次点击menu键时调用)
      */
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val x=1//未作任何修改，仅为展示两个菜单创建函数区别
-        return super.onPrepareOptionsMenu(menu)
-    }
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean = super.onPrepareOptionsMenu(menu)
 
     /**
      * 菜单按钮选中事件
@@ -87,6 +84,6 @@ class FoodListActivity : AppCompatActivity() {
      * 绑定列表数据
      */
     private fun bindListData(){
-        thisAdapter.AddData(FoodBriefItem("麻婆豆腐",15,12,4.1f))
+        //thisAdapter.AddData(FoodBriefItem("麻婆豆腐",15,12,4.1f))
     }
 }

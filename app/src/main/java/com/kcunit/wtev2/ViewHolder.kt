@@ -13,15 +13,14 @@ import android.widget.TextView
  * Created by Administrator on 2017/9/21.
  * 通用ViewHolder
  */
-class ViewHolder {
+class ViewHolder//构造方法，完成相关初始化
+private constructor(//Context上下文
+        context: Context, parent: ViewGroup, layoutRes: Int) {
     private var mViews: SparseArray<View> = SparseArray()   //存储ListView 的 item中的View
     private var item:View                  //存放convertView
     private var position:Int = 0               //游标
-    private var context: Context            //Context上下文
 
-    //构造方法，完成相关初始化
-    private constructor(context:Context, parent: ViewGroup,layoutRes:Int) {
-        this.context = context
+    init {
         val convertView:View = LayoutInflater.from(context).inflate(layoutRes, parent, false)
         convertView.tag = this
         this.item = convertView
@@ -33,7 +32,7 @@ class ViewHolder {
     companion object {
         //绑定ViewHolder与item
         fun bind(context: Context, convertView: View?, parent: ViewGroup, layoutRes: Int, position: Int): ViewHolder {
-            var holder: ViewHolder
+            val holder: ViewHolder
 
             if(convertView != null){
                 holder = convertView.tag as ViewHolder
@@ -48,15 +47,15 @@ class ViewHolder {
         }
     }
 
+
     /**
      * 获取view,先试图从已存储的列表中寻找,再直接使用findViewById寻找
      * @param id view的id
      * @return 对应id的View
      */
-    @Suppress("UNCHECKED_CAST")
-    @SuppressWarnings("unchecked")
+     @Suppress("UNCHECKED_CAST")
     fun <T:View>getView(id:Int): T {
-        var t:T? = mViews.get(id) as T
+        var t:T? = mViews.get(id) as T?
 
         if(t==null) {
             t = item.findViewById(id)
@@ -91,7 +90,7 @@ class ViewHolder {
      * 设置图片
      */
     fun setImageResource(id:Int, drawableRes:Int):ViewHolder {
-        val view:View = getView(id);
+        val view:View = getView(id)
         if (view is ImageView) {
             view.setImageResource(drawableRes)
         } else {
