@@ -9,8 +9,29 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="150dp"
+        android:src="@drawable/No_pic_default"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        />
 
-    
+    <EditText
+        style="@style/editTextStyle"
+        android:id="@+id/foodDetail_FoodName"
+        android:hint="菜名"
+        />
+
+    <EditText
+        style="@style/editTextStyle"
+        android:id="@+id/foodDetail_FoodPrice"
+        android:hint="价格"
+        />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/rateBarStyle"
+        android:id="@+id/foodDetail_Rate"
+        />
 
 </LinearLayout>

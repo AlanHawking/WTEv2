@@ -1,5 +1,6 @@
 package com.kcunit.wtev2
 
+import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -63,6 +64,7 @@ class FoodListActivity : AppCompatActivity() {
             //添加按钮
             R.id.foodListActionBar_menu_add -> {
                 Toast.makeText(this,"添加按钮已点击",Toast.LENGTH_SHORT).show()
+                //var intent;Intent = Intent(this,FoodDetailActivity::class)
             }
         }
         return super.onOptionsItemSelected(item)

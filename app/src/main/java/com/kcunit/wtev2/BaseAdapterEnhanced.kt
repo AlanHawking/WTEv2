@@ -88,7 +88,7 @@ abstract class BaseAdapterEnhanced<T:ListItemBase>(private var dataList: ArrayLi
      * @return 指定数据itemId元素在集合中的索引
      */
     fun findDataPositionByItemId(itemId:Int):Int{
-        return (0..(dataList.size-1)).firstOrNull { dataList[it].ItemId==itemId }
+        return (0..(dataList.size-1)).firstOrNull { dataList[it].itemId==itemId }
                 ?: -1
     }
 }
