@@ -64,7 +64,8 @@ class FoodListActivity : AppCompatActivity() {
             //添加按钮
             R.id.foodListActionBar_menu_add -> {
                 Toast.makeText(this,"添加按钮已点击",Toast.LENGTH_SHORT).show()
-                //var intent;Intent = Intent(this,FoodDetailActivity::class)
+                val intent = Intent(this,FoodDetailActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
