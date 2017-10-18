@@ -9,13 +9,14 @@ import android.view.MenuItem
 import android.widget.ListView
 import android.widget.Toast
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FoodListActivity : AppCompatActivity() {
 
     /**
      * 菜品数据
      */
-    private val foodDatas=LinkedList<FoodBriefItem>()
+    private val foodDatas=ArrayList<FoodBriefItem>()
 
     private lateinit var thisAdapter:BaseAdapterEnhanced<FoodBriefItem>
 
@@ -41,7 +42,7 @@ class FoodListActivity : AppCompatActivity() {
         thisList=findViewById(R.id.foodListListView) as ListView
         thisList.adapter=thisAdapter
 
-        //bindListData()
+        bindListData()
     }
 
     /**
@@ -51,11 +52,6 @@ class FoodListActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.food_list_menus,menu)
         return super.onCreateOptionsMenu(menu)
     }
-
-    /**
-     * 菜单加载前事件(该函数在每次点击menu键时调用)
-     */
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean = super.onPrepareOptionsMenu(menu)
 
     /**
      * 菜单按钮选中事件
@@ -84,6 +80,6 @@ class FoodListActivity : AppCompatActivity() {
      * 绑定列表数据
      */
     private fun bindListData(){
-        //thisAdapter.AddData(FoodBriefItem("麻婆豆腐",15,12,4.1f))
+        thisAdapter.addData(FoodBriefItem("酱肉丝",18,15,4.2f))
     }
 }
