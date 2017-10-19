@@ -128,7 +128,7 @@ private constructor(//Context上下文
      * 设置评分
      */
     fun setRate(id:Int,rate:Float):ViewHolder{
-        val ratingBar:RatingBar=getView(id)
+        val ratingBar=getView<RatingBar>(id)
         ratingBar.rating=rate
         return this
     }
