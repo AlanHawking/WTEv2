@@ -76,6 +76,7 @@ class FoodListActivity : AppCompatActivity() {
      */
     override fun onSupportNavigateUp(): Boolean {
         Toast.makeText(this,"回退按钮已点击",Toast.LENGTH_SHORT).show()
+        bindListData()
         return super.onSupportNavigateUp()
     }
 

@@ -27,6 +27,13 @@
         android:hint="价格"
         />
 
+    <com.kcunit.wtev2.EditTextWithLabel
+        style="@style/editTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cursor="@mipmap/compass"
+        />
+
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
