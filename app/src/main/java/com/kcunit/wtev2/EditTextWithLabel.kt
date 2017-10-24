@@ -152,7 +152,7 @@ class EditTextWithLabel : AppCompatEditText {
      */
     override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
         super.onTextChanged(text, start, lengthBefore, lengthAfter)
-        setIconVisibility(hasFocus() && text.isNullOrEmpty(),hasFocus())
+        setIconVisibility(!text.isNullOrEmpty(),true)
     }
 
     /**
@@ -181,8 +181,9 @@ class EditTextWithLabel : AppCompatEditText {
                             setText("")
                         } else {
                             //点击状态
-                            if(text.isNullOrEmpty()) {
-                                setText(text.removeRange(text.length - 1, text.length))
+                            if(!text.isNullOrEmpty()) {
+                                val textResult=text.removeRange(text.length - 1, text.length)
+                                setText(textResult)
                             }
                         }
                     }
