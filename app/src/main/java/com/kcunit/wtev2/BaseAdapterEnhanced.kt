@@ -11,7 +11,7 @@ import java.util.*
  * replacement for BaseAdapterPlus(which has been deleted)
  * BaseAdapter扩展泛型类
  */
-abstract class BaseAdapterEnhanced<T:ListItemBase>(private var dataList: ArrayList<T>, private var activityContext: Context, private var layoutItemResId: Int) : BaseAdapter() {
+abstract class BaseAdapterEnhanced<T:IListItemBase>(private var dataList: ArrayList<T>, private var activityContext: Context, private var layoutItemResId: Int) : BaseAdapter() {
     /**
      * 获取itemId
      * @param position 列表中的指定位置参数

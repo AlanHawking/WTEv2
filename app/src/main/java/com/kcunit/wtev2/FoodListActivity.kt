@@ -30,7 +30,7 @@ class FoodListActivity : AppCompatActivity() {
         //增加ActionBar回退按钮
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        foodDatas.add(FoodBriefItem("麻婆豆腐",15,12,4.1f))
+        foodDatas.add(FoodBriefItem("麻婆豆腐",15,12,4.1f,1))
         //初始化adapter
         thisAdapter=object :BaseAdapterEnhanced<FoodBriefItem>(foodDatas,this,R.layout.food_list_item){
             override fun bindData(viewHolder: ViewHolder, data: FoodBriefItem) {
@@ -76,7 +76,7 @@ class FoodListActivity : AppCompatActivity() {
      */
     override fun onSupportNavigateUp(): Boolean {
         Toast.makeText(this,"回退按钮已点击",Toast.LENGTH_SHORT).show()
-        bindListData()
+        //bindListData()
         return super.onSupportNavigateUp()
     }
 
@@ -84,6 +84,6 @@ class FoodListActivity : AppCompatActivity() {
      * 绑定列表数据
      */
     private fun bindListData(){
-        thisAdapter.addData(FoodBriefItem("酱肉丝",18,15,4.2f))
+        thisAdapter.addData(FoodBriefItem("酱肉丝",18,15,4.2f,2))
     }
 }
